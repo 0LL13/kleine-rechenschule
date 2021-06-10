@@ -1,0 +1,31 @@
+<!-- templates/plus_im_10er.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Plus rechnen im 10er-Raum</h2>
+
+<ul>
+    <form method="POST">{% csrf_token %}
+    {% for task in tasks %}
+        <li>{{ task.0 }} + {{ task.1 }} = 
+            <input type="text" size=2 name="answer_list"
+                   onkeypress="return event.charCode >= 48 && event.charCode <=57">{{ answer }}
+            </input>
+        </li>
+    {% endfor %}
+    </br>
+    </br>
+    <input type="button" onclick="location.href='/plus_im_10er_check/';"
+           value="Antworten prüfen">
+    </input>
+</ul>
+{% endblock content %}
+
+
+
+
+
+{% comment %}
+    <button type="button" class="btn btn-primary" id="refresh" onclick="location.reload(true);">Neue Aufgaben</button>
+{% endcomment %}

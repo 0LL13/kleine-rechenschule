@@ -1,0 +1,5 @@
+https://www.reddit.com/r/learnpython/comments/do8wto/generating_math_worksheets/
+
+Check out Django. Django comes with a built in web server and database management system from the go. So creating a table of x values, y values, and operands (e.g. +, -, /, *) would be extremely easy. You could then serve this content just statically as a fixed html page displaying the problem or as something more dynamic like a form accepting user input.
+
+Django makes creation of small apps like this easy and fast. Check this link for installation instructions of Django and this link for a quick walk through tutorial. As a prerequisitie I would suggest python 3.6+ to be installed with the python package Virtualenv installed to help isolate your development environment (although virtualenv is of course optional).

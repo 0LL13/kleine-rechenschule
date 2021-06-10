@@ -1,0 +1,23 @@
+<!-- templates/plus_im_10er_check.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Plus rechnen im 10er-Raum</h2>
+<h3>Antworten prüfen</h3>
+
+<ul>
+    <div>processing answers here
+        {% for answer in answer_list %}
+            <li>{{ answer }}</li>
+        {% endfor %}
+    </div>
+        {% for task in task_list %}
+            <li>{{ task }}</li>
+        {% endfor %}
+  </br></br>
+  <a href="/plus_im_10er/"><button type="button">Neue Aufgaben</button></a>
+
+</ul>
+
+{% endblock content %}

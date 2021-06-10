@@ -1,0 +1,31 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+    <head>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Kleine Rechenschule{% endblock title %}</title>
+        {% block head_favicon %}
+            <link rel="icon" type="image/png" href="{% static 'images/favicon.ico' %}">
+        {% endblock head_favicon %}        
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    </head>
+
+    <body>
+        <ul class="horizontal">
+            <li class="nav"><a href="{% url 'home' %}">Kleine Rechenschule</a></li>
+            <li class="nav"><a href="{% url 'aufgaben' %}">Aufgaben</a></li>
+            <li style="float:right">
+                <a>
+                    <img src="{% static 'images/rechnen_logo.png' %}" class="logo-image">
+                </a>
+            </li>
+        </ul>
+
+        <div>        
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </body>
+</html

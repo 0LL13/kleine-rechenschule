@@ -1,0 +1,13 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+environs = {extras = ["django"],version = "*"}
+pytest-django = "*"
+
+[requires]
+python_version = "3.8"

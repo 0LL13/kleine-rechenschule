@@ -1,0 +1,18 @@
+<!-- templates/zehnerraum.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>10er-Raum</h2>
+
+<ul class="vertical">
+    <li><a href="{% url 'plus_im_10er' %}">Plus rechnen</a></li>
+    <li><a href="{% url 'about' %}">Minus rechnen</a></li>
+    <li><a href="{% url 'about' %}">Plus und Minus rechnen</a></li>
+    <li><a href="{% url 'about' %}">Vorgänger und Nachfolger</a></li>
+    <li><a href="{% url 'about' %}">Größer, kleiner oder gleich?</a></li>
+    <li><a href="{% url 'about' %}">Ergänze!</a></li>
+    <li><a href="{% url 'about' %}">Gemischte Aufgaben</a></li>
+</ul>
+
+{% endblock content %}
