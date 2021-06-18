@@ -3,8 +3,8 @@
 from django import forms
 
 
-class ResultForm(forms.Form):
-    result = forms.IntegerField(label='answer')
+class AnswerForm(forms.Form):
+    answer = forms.CharField(label='answer', required=False)
 
 
 # class AnswerForm(forms.Form):

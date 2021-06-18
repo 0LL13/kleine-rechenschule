@@ -8,18 +8,20 @@
 <ul>
     <form method="POST">{% csrf_token %}
     {% for task in tasks %}
-        <li>{{ task.0 }} + {{ task.1 }} = 
-            <input type="text" size=2 name="answer_list"
-                   onkeypress="return event.charCode >= 48 && event.charCode <=57">{{ answer }}
+        <li><label for="id_answer">{{ task.0 }} + {{ task.1 }} = </label>
+            <input id="id_answer" type="text" size=2 name="answer[{{ forloop.counter }}]"
+                   onkeypress="return event.charCode >= 48 && event.charCode <=57">{{ form }}
             </input>
         </li>
     {% endfor %}
-    </br>
-    </br>
-    <input type="button" onclick="location.href='/plus_im_10er_check/';"
-           value="Antworten prüfen">
-    </input>
 </ul>
+
+    </br>
+    </br>
+    <form action="/plus_im_10er_check/" method="GET">
+        <input type="submit" value="Antworten prüfen">
+    </form>
+
 {% endblock content %}
 
 
@@ -27,5 +29,19 @@
 
 
 {% comment %}
+
+    </br>
+    </br>
+    <input type="button" onclick="location.href='/plus_im_10er_check/';"
+           value="Antworten prüfen">
+    </input>
+
+    <form action = "" method = "GET">
+        <label for="your_name">Your name: </label>
+        <input id="your_name" type="text" name="your_name">
+        <input type="submit" value="OK">
+    </form>
+
     <button type="button" class="btn btn-primary" id="refresh" onclick="location.reload(true);">Neue Aufgaben</button>
+
 {% endcomment %}
