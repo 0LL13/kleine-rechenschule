@@ -1,7 +1,7 @@
 # krs/views.py
 import random
 # from django.http import HttpResponseRedirect
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.shortcuts import render
 from .forms import AnswerForm
 
@@ -36,25 +36,27 @@ class Plus_im_10erPageView(TemplateView):
         form = AnswerForm(request.POST)
         print('Doing the post')
         print('form:', form)
-        print('form[answer]:', form["answer"])
+        # print('form["answer"]:', form["answer"])
         print('form.is_valid():', form.is_valid())
         if form.is_valid():
-            answer = form.cleaned_data['answer']
-            print('answer:', answer)
-            print('form:', form)
-            for i in range(1, 11):
-                print(f'answer[{i}]:', answer[i])
-        return render(request, self.success_html, {'form': form, 'answer': answer}) # noqa
+            answers = form.cleaned_data
+            print('answers:', answers)
+
+        return render(request, self.success_html, {'form': form, 'answers': answers}) # noqa
 
 
-class Plus_im_10er_checkPageView(TemplateView):
+class Plus_im_10er_checkPageView(ListView):
     template_name = 'plus_im_10er_check.html'
 
-    def post(self, request, *args, **kwargs):
-        # answer_list = request.session.get('answer')
-        answer_list = request.POST()
+    def get_queryset(self, request):
+        answer_list = request.POST.get('answers')
+        tasks = request.POST.get('tasks')
         print("Now in plus_im_10er_check")
-        return answer_list
+        return answer_list, tasks
+
+    def post_list(request):
+        answer_list = request.POST.get()
+        return render(request, 'plus_im_10er.html', answer_list)
 
 
 class HomePageView(TemplateView):

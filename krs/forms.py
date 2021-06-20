@@ -4,7 +4,16 @@ from django import forms
 
 
 class AnswerForm(forms.Form):
-    answer = forms.CharField(label='answer', required=False)
+    answer_1 = forms.CharField(label='answer', required=False)
+    answer_2 = forms.CharField(label='answer', required=False)
+    answer_3 = forms.CharField(label='answer', required=False)
+    answer_4 = forms.CharField(label='answer', required=False)
+    answer_5 = forms.CharField(label='answer', required=False)
+    answer_6 = forms.CharField(label='answer', required=False)
+    answer_7 = forms.CharField(label='answer', required=False)
+    answer_8 = forms.CharField(label='answer', required=False)
+    answer_9 = forms.CharField(label='answer', required=False)
+    answer_10 = forms.CharField(label='answer', required=False)
 
 
 # class AnswerForm(forms.Form):

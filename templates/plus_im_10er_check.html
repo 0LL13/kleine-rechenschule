@@ -7,14 +7,16 @@
 <h3>Antworten prüfen</h3>
 
 <ul>
-    <div>processing answers here
-        {% for answer in answer_list %}
-            <li>{{ answer }}</li>
+    <div>
+        </br></br>
+        {% for k, v in answers.items %}
+            <li>{{ v }}</li>
         {% endfor %}
     </div>
-        {% for task in task_list %}
+        {% for task in tasks %}
             <li>{{ task }}</li>
         {% endfor %}
+
   </br></br>
   <a href="/plus_im_10er/"><button type="button">Neue Aufgaben</button></a>
 
