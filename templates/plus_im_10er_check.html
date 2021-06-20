@@ -8,16 +8,17 @@
 
 <ul>
     <div>
-        </br></br>
-        {% for k, v in answers.items %}
-            <li>{{ v }}</li>
-        {% endfor %}
-    </div>
         {% for task in tasks %}
-            <li>{{ task }}</li>
+            {% if task.2 == task.3 %}
+                <li>{{ task.0 }} + {{ task.1 }} = {{ task.3 }} &#128515</li>
+            {% else %}
+                <li>{{ task.0 }} + {{ task.1 }} &#8800 {{ task.3 }}</li>
+            {% endif %}
         {% endfor %}
-
-  </br></br>
+    </br>
+    Du hast {{ tasks.2.4 }} &#128515 von 3.
+    </div>
+    </br></br>
   <a href="/plus_im_10er/"><button type="button">Neue Aufgaben</button></a>
 
 </ul>

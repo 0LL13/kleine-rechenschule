@@ -10,10 +10,12 @@ class Plus_im_10erPageView(TemplateView):
     form_class = AnswerForm
     template_name = 'plus_im_10er.html'
     success_html = 'plus_im_10er_check.html'
+    task_list = []
 
+    @classmethod
     def tasks(self):
         task_list = []
-        for i in range(10):
+        for i in range(3):
             while True:
                 x = random.randint(0, 9)
                 y = random.randint(0, 9)
@@ -21,42 +23,48 @@ class Plus_im_10erPageView(TemplateView):
                 if z <= 10:
                     task_list.append((x, y, z))
                     break
+        self.task_list = task_list
         return task_list
 
     def get_context_data(self, **kwargs):
         context = super(Plus_im_10erPageView, self).get_context_data(**kwargs)  # noqa
         task_list = self.tasks()
         context['tasks'] = task_list
-        print('context:\n', context)
+        print('task_list after get_context_data:\n', task_list)
         self.context = context
 
         return context
 
     def post(self, request):
         form = AnswerForm(request.POST)
+        tasks_w_answers = list()
         print('Doing the post')
-        print('form:', form)
-        # print('form["answer"]:', form["answer"])
+        print('self.task_list:', self.task_list)
         print('form.is_valid():', form.is_valid())
         if form.is_valid():
             answers = form.cleaned_data
-            print('answers:', answers)
+            tasks = self.task_list
+            index = 1
+            counter = 0
+            for task in tasks:
+                print('task in post:', task)
+                answer = int(answers[f'answer_{index}'])
+                print('answer:', answer)
+                x, y, z = task
+                if z == answer:
+                    counter += 1
+                task_new = (*task, answer, counter)
+                print('task_new:', task_new)
+                tasks_w_answers.append(task_new)
+                index += 1
 
-        return render(request, self.success_html, {'form': form, 'answers': answers}) # noqa
+        return render(request, self.success_html, {'form': form,
+                                                   'answers': answers,
+                                                   'tasks': tasks_w_answers}) # noqa
 
 
 class Plus_im_10er_checkPageView(ListView):
     template_name = 'plus_im_10er_check.html'
-
-    def get_queryset(self, request):
-        answer_list = request.POST.get('answers')
-        tasks = request.POST.get('tasks')
-        print("Now in plus_im_10er_check")
-        return answer_list, tasks
-
-    def post_list(request):
-        answer_list = request.POST.get()
-        return render(request, 'plus_im_10er.html', answer_list)
 
 
 class HomePageView(TemplateView):
