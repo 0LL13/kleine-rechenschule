@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 environs = {extras = ["django"],version = "*"}
 pytest-django = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.8"

@@ -7,7 +7,7 @@
 
 <ul>
     <form method="POST">{% csrf_token %}
-    {% for task in tasks %}
+    {% for task in task_list %}
         <li><label for="id_answer">{{ task.0 }} + {{ task.1 }} = </label>
             <input id="id_answer" type="text" size=2 name="answer_{{ forloop.counter }}"
                    onkeypress="return event.charCode >= 48 && event.charCode <=57">{{ form }}

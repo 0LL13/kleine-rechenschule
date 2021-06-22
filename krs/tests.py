@@ -1,6 +1,7 @@
 # krs/tests.py
 # -*- coding: utf-8 -*-
 from django.test import SimpleTestCase
+from django.urls import reverse
 
 
 class SimpleTests(SimpleTestCase):
@@ -10,6 +11,10 @@ class SimpleTests(SimpleTestCase):
 
     def test_about_page_status_code(self):
         response = self.client.get('/about/')
+        assert response.status_code == 200
+
+    def test_aufgaben_page_status_code(self):
+        response = self.client.get('/aufgaben/')
         assert response.status_code == 200
 
     def test_zehnerraum_page_status_code(self):
@@ -39,3 +44,14 @@ class SimpleTests(SimpleTestCase):
     def test_plus_im_10er_page_status_code(self):
         response = self.client.get('/plus_im_10er/')
         assert response.status_code == 200
+
+    def test_plus_im_10er_check_page_status_code(self):
+        response = self.client.get('/plus_im_10er_check/')
+        assert response.status_code == 200
+
+#     def test_plus_im_10er_post_method(self):
+#         # answers = {'answer_1': 3, 'answer_2': 7}
+#         tasks = [(0, 3, 3, 3, 1), (5, 1, 6, 7, 1)]
+#         response = self.client.post(reverse('/plus_im_10er_check/'), {'tasks': tasks})  # noqa
+# #                                                     'answers': answers})  # noqa
+#         assert response == [(0, 3, 3, 3, 1), (5, 1, 6, 7, 1)]

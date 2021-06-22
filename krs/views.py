@@ -1,69 +1,79 @@
-# krs/views.py
 import random
-# from django.http import HttpResponseRedirect
-from django.views.generic import TemplateView, ListView
+
+# from typing import Any
+from django.views.generic import TemplateView
 from django.shortcuts import render
 from .forms import AnswerForm
 
 
 class Plus_im_10erPageView(TemplateView):
-    form_class = AnswerForm
     template_name = 'plus_im_10er.html'
     success_html = 'plus_im_10er_check.html'
-    task_list = []
+    no_of_tasks = 3
+
+#     def __init__(self, **kwargs: Any) -> None:
+#         super().__init__(**kwargs)
+#         self.tasks = generate_plus10_tasks(no_of_tasks=self.no_of_tasks)
 
     @classmethod
-    def tasks(self):
+    def generate_plus10_tasks(self):
+        """
+        Generate tasks containing two addends with a sum less or equal 10.
+        """
         task_list = []
-        for i in range(3):
+        for _ in range(self.no_of_tasks):
             while True:
                 x = random.randint(0, 9)
                 y = random.randint(0, 9)
-                z = x + y
-                if z <= 10:
-                    task_list.append((x, y, z))
+                result = x + y
+                if result <= 10:
+                    task_list.append((x, y, result))
                     break
         self.task_list = task_list
         return task_list
 
     def get_context_data(self, **kwargs):
-        context = super(Plus_im_10erPageView, self).get_context_data(**kwargs)  # noqa
-        task_list = self.tasks()
-        context['tasks'] = task_list
-        print('task_list after get_context_data:\n', task_list)
+        context = super().get_context_data(**kwargs)  # noqa
+        context['task_list'] = self.generate_plus10_tasks()
+        print('task_list after get_context_data:\n', self.task_list)
         self.context = context
-
         return context
 
     def post(self, request):
         form = AnswerForm(request.POST)
-        tasks_w_answers = list()
+        answered_tasks = []
         print('Doing the post')
-        print('self.task_list:', self.task_list)
-        print('form.is_valid():', form.is_valid())
+
         if form.is_valid():
             answers = form.cleaned_data
-            tasks = self.task_list
+            total_correct_answers = 0
+
+            # helper to get the form_field name
             index = 1
-            counter = 0
-            for task in tasks:
-                print('task in post:', task)
+
+            for task in self.task_list:
+                if index > self.no_of_tasks:
+                    break
+                # TBD: form.fields.items()
                 answer = int(answers[f'answer_{index}'])
-                print('answer:', answer)
-                x, y, z = task
-                if z == answer:
-                    counter += 1
-                task_new = (*task, answer, counter)
-                print('task_new:', task_new)
-                tasks_w_answers.append(task_new)
+                print(f'answer_{index} in post: ', answer)
+                print('task in post: ', task)
+                x, y, correct_result = task
+                print('x, y, correct_result: ', x, y, correct_result)
+                if answer == correct_result:
+                    total_correct_answers += 1
+                answered_tasks.append((x, y, correct_result, answer,
+                                       total_correct_answers))  # noqa
+                print('answered_tasks: ', answered_tasks)
                 index += 1
 
-        return render(request, self.success_html, {'form': form,
-                                                   'answers': answers,
-                                                   'tasks': tasks_w_answers}) # noqa
+        return render(request,
+                      self.success_html,
+                      {'answered_tasks': answered_tasks}
+                      )
 
 
-class Plus_im_10er_checkPageView(ListView):
+class Plus_im_10er_checkPageView(TemplateView):
     template_name = 'plus_im_10er_check.html'
 
 
