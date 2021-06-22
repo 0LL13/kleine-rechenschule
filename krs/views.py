@@ -35,37 +35,15 @@ class Plus_im_10erPageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)  # noqa
         context['task_list'] = self.generate_plus10_tasks()
-        print('task_list after get_context_data:\n', self.task_list)
         self.context = context
         return context
 
     def post(self, request):
+        task_list = self.task_list
+        no_of_tasks = self.no_of_tasks
         form = AnswerForm(request.POST)
-        answered_tasks = []
-        print('Doing the post')
-
-        if form.is_valid():
-            answers = form.cleaned_data
-            total_correct_answers = 0
-
-            # helper to get the form_field name
-            index = 1
-
-            for task in self.task_list:
-                if index > self.no_of_tasks:
-                    break
-                # TBD: form.fields.items()
-                answer = int(answers[f'answer_{index}'])
-                print(f'answer_{index} in post: ', answer)
-                print('task in post: ', task)
-                x, y, correct_result = task
-                print('x, y, correct_result: ', x, y, correct_result)
-                if answer == correct_result:
-                    total_correct_answers += 1
-                answered_tasks.append((x, y, correct_result, answer,
-                                       total_correct_answers))  # noqa
-                print('answered_tasks: ', answered_tasks)
-                index += 1
+        answers = form.validate_answers()
+        answered_tasks = form.correct_answers(task_list, answers, no_of_tasks)
 
         return render(request,
                       self.success_html,
