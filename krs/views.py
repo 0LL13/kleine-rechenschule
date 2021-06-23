@@ -1,6 +1,5 @@
 import random
 
-# from typing import Any
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from .forms import AnswerForm
@@ -10,10 +9,6 @@ class Plus_im_10erPageView(TemplateView):
     template_name = 'plus_im_10er.html'
     success_html = 'plus_im_10er_check.html'
     no_of_tasks = 3
-
-#     def __init__(self, **kwargs: Any) -> None:
-#         super().__init__(**kwargs)
-#         self.tasks = generate_plus10_tasks(no_of_tasks=self.no_of_tasks)
 
     @classmethod
     def generate_plus10_tasks(self):
@@ -42,7 +37,8 @@ class Plus_im_10erPageView(TemplateView):
         task_list = self.task_list
         no_of_tasks = self.no_of_tasks
         form = AnswerForm(request.POST)
-        answers = form.validate_answers()
+        answers = form.clean_answers()
+        print('answers', answers)
         answered_tasks = form.correct_answers(task_list, answers, no_of_tasks)
 
         return render(request,
