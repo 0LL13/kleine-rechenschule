@@ -35,6 +35,7 @@ class AnswerForm(forms.Form):
                 answer = '?'
                 answered_tasks.append((x, y, correct_result, answer,
                                        total_correct_answers))
+                index += 1
                 continue
 
             answer = int(answers[f'answer_{index}'])
