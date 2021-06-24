@@ -1,0 +1,30 @@
+<!-- templates/minus_im_10er.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Minus rechnen im 10er-Raum</h2>
+
+<ul>
+    <form method="POST">{% csrf_token %}
+    {% for task in task_list %}
+        <li><label for="id_answer">{{ task.0 }} - {{ task.1 }} = </label>
+            <input id="id_answer" type="text" size=2 name="answer_{{ forloop.counter }}"
+                   onkeypress="return event.charCode >= 48 && event.charCode <=57">{{ form }}
+            </input>
+        </li>
+    {% endfor %}
+</ul>
+
+    </br>
+    </br>
+    <form action="/minus_im_10er_check/" method="GET">
+        <input type="submit" value="Antworten prüfen">
+    </form>
+
+{% endblock content %}
+
+
+{% comment %}
+
+{% endcomment %}

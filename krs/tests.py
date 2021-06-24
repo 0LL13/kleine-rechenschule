@@ -1,6 +1,5 @@
 # krs/tests.py
 # -*- coding: utf-8 -*-
-# import pytest
 
 from django.test import SimpleTestCase
 from django.core.exceptions import ValidationError
@@ -21,8 +20,8 @@ class SimpleTests(SimpleTestCase):
         response = self.client.get('/aufgaben/')
         assert response.status_code == 200
 
-    def test_zehnerraum_page_status_code(self):
-        response = self.client.get('/zehnerraum/')
+    def test_ten_space_page_status_code(self):
+        response = self.client.get('/ten_space/')
         assert response.status_code == 200
 
     def test_zwanzigerraum_page_status_code(self):
@@ -45,27 +44,24 @@ class SimpleTests(SimpleTestCase):
         response = self.client.get('/großes1x1/')
         assert response.status_code == 200
 
-    def test_plus_im_10er_page_status_code(self):
-        response = self.client.get('/plus_im_10er/')
+    def test_plus_in_10space_page_status_code(self):
+        response = self.client.get('/plus_in_10space/')
         assert response.status_code == 200
 
-    def test_plus_im_10er_check_page_status_code(self):
-        response = self.client.get('/plus_im_10er_check/')
+    def test_plus_in_10space_check_page_status_code(self):
+        response = self.client.get('/plus_in_10space_check/')
         assert response.status_code == 200
 
-    def test_plus_im_10er_post_method(self):
-        answers = {'answer_1': 3, 'answer_2': 7, 'answer_3': 6}
-        tasks = [(0, 3, 3), (5, 1, 6), (4, 2, 6)]
-        data = {'tasks': tasks, 'answers': answers}
-        response = self.client.post(('/plus_im_10er/'), data)
+    def test_minus_in_10space_page_status_code(self):
+        response = self.client.get('/minus_in_10space/')
         assert response.status_code == 200
-        self.assertContains(response, "Antworten prüfen")
 
-    def test_plus_im_10er_post_method_wo_tasks(self):
-        c = Client()
-        with self.assertRaises(AttributeError):
-            c.post(('/plus_im_10er/'), [])
+    def test_minus_in_10space_check_page_status_code(self):
+        response = self.client.get('/minus_in_10space_check/')
+        assert response.status_code == 200
 
+
+class AnswerFormTest(SimpleTestCase):
     def test_AnswerForm_clean_answers(self):
         form = AnswerForm()
 
@@ -89,3 +85,33 @@ class SimpleTests(SimpleTestCase):
         form = AnswerForm()
         answered_tasks = form.correct_answers(task_list, answers, no_of_tasks)
         assert answered_tasks == []
+
+
+class Plus_in_10spaceTests(SimpleTestCase):
+    def test_plus_in_10space_post_method(self):
+        answers = {'answer_1': 3, 'answer_2': 7, 'answer_3': 6}
+        tasks = [(0, 3, 3), (5, 1, 6), (4, 2, 6)]
+        data = {'tasks': tasks, 'answers': answers}
+        response = self.client.post(('/plus_in_10space/'), data)
+        assert response.status_code == 200
+        self.assertContains(response, "Antworten prüfen")
+
+    def test_plus_in_10space_post_method_wo_tasks(self):
+        c = Client()
+        with self.assertRaises(AttributeError):
+            c.post(('/plus_in_10space/'), [])
+
+
+class Minus_in_10spaceTests(SimpleTestCase):
+    def test_minus_in_10space_post_method(self):
+        answers = {'answer_1': 3, 'answer_2': 7, 'answer_3': 6}
+        tasks = [(0, 3, 3), (5, 1, 6), (4, 2, 6)]
+        data = {'tasks': tasks, 'answers': answers}
+        response = self.client.post(('/minus_in_10space/'), data)
+        assert response.status_code == 200
+        self.assertContains(response, "Antworten prüfen")
+
+    def test_minus_in_10space_post_method_wo_tasks(self):
+        c = Client()
+        with self.assertRaises(AttributeError):
+            c.post(('/minus_in_10space/'), [])

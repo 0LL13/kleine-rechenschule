@@ -5,9 +5,9 @@ from django.shortcuts import render
 from .forms import AnswerForm
 
 
-class Plus_im_10erPageView(TemplateView):
-    template_name = 'plus_im_10er.html'
-    success_html = 'plus_im_10er_check.html'
+class Plus_in_10spacePageView(TemplateView):
+    template_name = 'plus_in_10space.html'
+    success_html = 'plus_in_10space_check.html'
     no_of_tasks = 3
 
     @classmethod
@@ -47,8 +47,55 @@ class Plus_im_10erPageView(TemplateView):
                       )
 
 
-class Plus_im_10er_checkPageView(TemplateView):
-    template_name = 'plus_im_10er_check.html'
+class Plus_in_10space_checkPageView(TemplateView):
+    template_name = 'plus_in_10space_check.html'
+
+
+class Minus_in_10spacePageView(TemplateView):
+    template_name = 'minus_in_10space.html'
+    success_html = 'minus_in_10space_check.html'
+    no_of_tasks = 3
+
+    @classmethod
+    def generate_minus10_tasks(self):
+        """
+        Generate tasks containing a minuend and a subtrahend with a difference
+        higher or equal 0.
+        """
+        task_list = []
+        for _ in range(self.no_of_tasks):
+            while True:
+                x = random.randint(0, 9)
+                y = random.randint(0, 9)
+                result = x - y
+                if result >= 0:
+                    task_list.append((x, y, result))
+                    break
+        self.task_list = task_list
+        return task_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)  # noqa
+        context['task_list'] = self.generate_minus10_tasks()
+        self.context = context
+        return context
+
+    def post(self, request):
+        task_list = self.task_list
+        no_of_tasks = self.no_of_tasks
+        form = AnswerForm(request.POST)
+        answers = form.clean_answers()
+        print('answers', answers)
+        answered_tasks = form.correct_answers(task_list, answers, no_of_tasks)
+
+        return render(request,
+                      self.success_html,
+                      {'answered_tasks': answered_tasks}
+                      )
+
+
+class Minus_in_10space_checkPageView(TemplateView):
+    template_name = 'minus_in_10space_check.html'
 
 
 class HomePageView(TemplateView):
@@ -63,8 +110,8 @@ class AufgabenPageView(TemplateView):
     template_name = 'aufgaben.html'
 
 
-class ZehnerraumPageView(TemplateView):
-    template_name = 'zehnerraum.html'
+class TenSpacePageView(TemplateView):
+    template_name = 'ten_space.html'
 
 
 class ZwanzigerraumPageView(TemplateView):

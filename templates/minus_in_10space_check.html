@@ -1,0 +1,28 @@
+<!-- templates/minus_im_10er_check.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Minus rechnen im 10er-Raum</h2>
+<h3>Antworten prüfen</h3>
+
+<ul>
+    <div>
+        {% for task in answered_tasks %}
+            {% if task.2 == task.3 %}
+                <li>{{ task.0 }} - {{ task.1 }} = {{ task.3 }} &#128515</li>
+            {% elif task.3 == '?' %}
+                <li>{{ task.0 }} - {{ task.1 }} = ?</li>
+            {% else %}
+                <li>{{ task.0 }} - {{ task.1 }} &#8800 {{ task.3 }}</li>
+            {% endif %}
+        {% endfor %}
+    </br>
+    Du hast {{ answered_tasks.2.4 }} &#128515 von 3.
+    </div>
+    </br></br>
+  <a href="/minus_im_10er/"><button type="button">Neue Aufgaben</button></a>
+
+</ul>
+
+{% endblock content %}
