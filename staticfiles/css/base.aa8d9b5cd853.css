@@ -1,0 +1,63 @@
+/* static/css/base.css */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li a {
+  display: block;
+  color: #000;
+  padding: 4px 6px;
+  text-align: left;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: Green;
+  color: white;
+}
+
+li.nav {
+  float: left;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.horizontal {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: Gray;
+  overflow: hidden;
+}
+
+.vertical {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #f1f1f1;
+  overflow: hidden;
+}
+
+.logo-image {
+    float: right;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -7px;
+}
+
+.active {
+  background-color: #4CAF50;
+  color: white;
+}

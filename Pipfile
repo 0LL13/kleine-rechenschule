@@ -6,9 +6,12 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-environs = {extras = ["django"],version = "*"}
+environs = {extras = ["django"],version = "==8.0.0"}
 pytest-django = "*"
 pytest-cov = "*"
+psycopg2-binary = "==2.8.5"
+whitenoise = "==5.1.0"
+gunicorn = "==19.9.0"
 
 [requires]
 python_version = "3.8"
