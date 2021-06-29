@@ -142,3 +142,7 @@ class Plus_Minus_in_10spaceTests(SimpleTestCase):
         c = Client()
         with self.assertRaises(AttributeError):
             c.post(('/plus_minus_in_10space/'), [])
+
+#     def test_plus_minus_in_10space_generate_task_w_result_greater_10(self):
+#         tasks = self.view.generate_plus_minus_in_10space_tasks()
+#         print(tasks)

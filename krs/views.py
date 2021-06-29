@@ -103,7 +103,7 @@ class Minus_in_10space_checkPageView(TemplateView):
 class Plus_Minus_in_10spacePageView(TemplateView):
     template_name = 'plus_minus_in_10space.html'
     success_html = 'plus_minus_in_10space_check.html'
-    no_of_tasks = 4
+    no_of_tasks = 10
 
     @classmethod
     def generate_plus_minus_in_10space_tasks(self):
@@ -122,27 +122,34 @@ class Plus_Minus_in_10spacePageView(TemplateView):
             x = random.randint(0, 9)
             y = random.randint(0, 9)
             if plus_minus[i] == 1:
-                while True:
-                    result = x - y
-                    if result >= 0:
-                        operation = " - "
-                        task_list.append((x, y, operation, result))
-                        break
-                    else:
-                        x = random.randint(0, 9)
-                        y = random.randint(0, 9)
+                task_list = self.subtraction_task(task_list, x, y)
             else:
-                while True:
-                    result = x + y
-                    if result <= 10:
-                        operation = " + "
-                        task_list.append((x, y, operation, result))
-                        break
-                    else:
-                        x = random.randint(0, 9)
-                        y = random.randint(0, 9)
-
+                task_list = self.addition_task(task_list, x, y)
         self.task_list = task_list
+        return task_list
+
+    def addition_task(task_list, x, y):
+        while True:
+            result = x + y
+            if result <= 10:
+                operation = " + "
+                task_list.append((x, y, operation, result))
+                break
+            else:
+                x = random.randint(0, 9)
+                y = random.randint(0, 9)
+        return task_list
+
+    def subtraction_task(task_list, x, y):
+        while True:
+            result = x - y
+            if result >= 0:
+                operation = " - "
+                task_list.append((x, y, operation, result))
+                break
+            else:
+                x = random.randint(0, 9)
+                y = random.randint(0, 9)
         return task_list
 
     def get_context_data(self, **kwargs):

@@ -30,8 +30,14 @@ SECRET_KEY = env.str("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default=False)
 
+# HOSTING
 ALLOWED_HOSTS = ['herokuapp.com', 'www.strato.de', 'localhost', '127.0.0.1']
 
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# This will break the tests and return status_code 301:
+# SECURE_SSL_REDIRECT = True
 
 # Application definition
 
@@ -80,14 +86,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-#    'postgresql': env.dj_db_url("DATABASE_URL"),
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': env.dj_db_url("DATABASE_URL")
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation

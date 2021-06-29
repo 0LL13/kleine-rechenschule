@@ -7,18 +7,21 @@
 <h3>Antworten prüfen</h3>
 
 <ul>
-    <div>
+    <table style="width:20%">
         {% for task in answered_tasks %}
-            {% if task.2 == task.3 %}
-                <li>{{ task.0 }} + {{ task.1 }} = {{ task.3 }} &#128515</li>
-            {% elif task.3 == '?' %}
-                <li>{{ task.0 }} + {{ task.1 }} = ?</li>
+        <tr>
+            {% if task.3 == task.4 %}
+                <td>{{ task.0 }}{{ task.2 }}{{ task.1 }} = </td><td>{{ task.3 }}</td><td> &#128515</li>
+            {% elif task.4 == '?' %}
+                <td>{{ task.0 }}{{ task.2 }}{{ task.1 }} = </td><td>?</td>
             {% else %}
-                <li>{{ task.0 }} + {{ task.1 }} &#8800 {{ task.3 }}</li>
+                <td>{{ task.0 }}{{ task.2 }}{{ task.1 }} &#8800 </td><td>{{ task.3 }}</td>
             {% endif %}
-        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
     </br>
-    Du hast {{ answered_tasks.9.4 }} &#128515 von 10.
+    Du hast {{ answered_tasks.9.5 }} &#128515 von 10.
     </div>
     </br></br>
   <a href="/plus_in_10space/"><button type="button">Neue Aufgaben</button></a>
