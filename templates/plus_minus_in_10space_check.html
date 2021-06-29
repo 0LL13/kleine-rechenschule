@@ -11,7 +11,7 @@
         {% for task in answered_tasks %}
         <tr>
             {% if task.3 == task.4 %}
-                <td>{{ task.0 }}{{ task.2 }}{{ task.1 }} = </td><td>{{ task.3 }}</td><td> &#128515</td>
+                <td>{{ task.0 }}{{ task.2 }}{{ task.1 }} = </td><td>{{ task.3 }}</td><td>&#128515</td>
             {% elif task.4 == '?' %}
                 <td>{{ task.0 }}{{ task.2 }}{{ task.1 }} = </td><td>?</td>
             {% else %}
@@ -21,10 +21,10 @@
         {% endfor %}
     </table>
     </br>
-    Du hast {{ answered_tasks.9.5 }} &#128515 von 10.
+    Du hast {{ answered_tasks.3.5 }} &#128515 von 4.
     </div>
     </br></br>
-  <a href="/minus_in_10space/"><button type="button">Neue Aufgaben</button></a>
+  <a href="/plus_minus_in_10space/"><button type="button">Neue Aufgaben</button></a>
 
 </ul>
 

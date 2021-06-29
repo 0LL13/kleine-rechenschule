@@ -1,16 +1,16 @@
-<!-- templates/minus_im_10er.html -->
+<!-- templates/plus_minus_im_10er.html -->
 {% extends 'base.html' %}
 
 {% block content %}
 
-<h2>Minus rechnen im 10er-Raum</h2>
+<h2>Plus und Minus rechnen im 10er-Raum</h2>
 
 <ul>
     <table style="width:20%">
     <form method="POST">{% csrf_token %}
         {% for task in task_list %}
             <tr>
-                <td><label for="id_answer">{{ task.0 }} - {{ task.1 }} = </label></td>
+                <td><label for="id_answer">{{ task.0 }}{{ task.2 }}{{ task.1 }} = </label></td>
                 <td><input id="id_answer" type="text" size=2 name="answer_{{ forloop.counter }}"
                    onkeypress="return event.charCode >= 48 && event.charCode <=57">{{ form }}
                 </input></td>
@@ -21,7 +21,7 @@
 
     </br>
     </br>
-    <form action="/minus_in_10space_check/" method="GET">
+    <form action="/plus_minus_in_10space_check/" method="GET">
         <input type="submit" value="Antworten prüfen">
     </form>
 

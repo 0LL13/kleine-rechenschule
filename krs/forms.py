@@ -28,12 +28,12 @@ class AnswerForm(forms.Form):
         index = 1
 
         for task in task_list:
-            x, y, correct_result = task
+            x, y, operation, correct_result = task
             if index > no_of_tasks:
                 break
             if answers[f'answer_{index}'] is None:
                 answer = '?'
-                answered_tasks.append((x, y, correct_result, answer,
+                answered_tasks.append((x, y, operation, correct_result, answer,
                                        total_correct_answers))
                 index += 1
                 continue
@@ -41,7 +41,7 @@ class AnswerForm(forms.Form):
             answer = int(answers[f'answer_{index}'])
             if answer == correct_result:
                 total_correct_answers += 1
-            answered_tasks.append((x, y, correct_result, answer,
+            answered_tasks.append((x, y, operation, correct_result, answer,
                                    total_correct_answers))
             index += 1
 

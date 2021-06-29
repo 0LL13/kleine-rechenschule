@@ -14,6 +14,8 @@ from .views import (
     Minus_in_10spacePageView,
     Plus_in_10space_checkPageView,
     Minus_in_10space_checkPageView,
+    Plus_Minus_in_10spacePageView,
+    Plus_Minus_in_10space_checkPageView,
 )
 
 
@@ -25,6 +27,8 @@ urlpatterns = [
     path('minus_in_10space/', Minus_in_10spacePageView.as_view(), name='minus_in_10space'),  # noqa
     path('plus_in_10space_check/', Plus_in_10space_checkPageView.as_view(), name='plus_in_10space_check'),  # noqa
     path('minus_in_10space_check/', Minus_in_10space_checkPageView.as_view(), name='minus_in_10space_check'),  # noqa
+    path('plus_minus_in_10space/', Plus_Minus_in_10spacePageView.as_view(), name='plus_minus_in_10space'),  # noqa
+    path('plus_minus_in_10space_check/', Plus_Minus_in_10space_checkPageView.as_view(), name='plus_minus_in_10space_check'),  # noqa
     path('kleines1x1/', Kleines1x1PageView.as_view(), name='kleines1x1'),  # noqa
     path('hunderterraum/', HunderterraumPageView.as_view(), name='hunderterraum'),  # noqa
     path('großes1x1/', Groszes1x1PageView.as_view(), name='großes1x1'),  # noqa
