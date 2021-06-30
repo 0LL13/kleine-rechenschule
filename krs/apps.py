@@ -1,5 +1,5 @@
-# from django.apps import AppConfig
+from django.apps import AppConfig
 
 
-# class KrsConfig(AppConfig):
-#     name = 'krs'
+class KrsConfig(AppConfig):
+    name = 'krs'
