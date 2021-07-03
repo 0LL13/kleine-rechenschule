@@ -177,7 +177,7 @@ class Plus_Minus_in_10space_checkPageView(TemplateView):
 
 
 class HomePageView(TemplateView):
-    template_name = 'home.html'
+    template_name = 'index.html'
 
 
 class AboutPageView(TemplateView):
