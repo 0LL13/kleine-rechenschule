@@ -32,7 +32,7 @@ SECRET_KEY = env.str("SECRET_KEY")
 DEBUG = env.bool("DEBUG", default=False)
 
 # HOSTING
-ALLOWED_HOSTS = ['192.168.40.92', '192.168.40.93', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 # ALLOWED_HOSTS = ['*']
 
 SESSION_COOKIE_SECURE = env.bool("SESSION_COOKIE_SECURE", default=True)
@@ -150,6 +150,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
 
 # To test if Django finds the static files if whitenoise doesn't:
 # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'  # noqa
+
+# value of DJANGO_SETTINGS_MODULE should be in Python path syntax, e.g. mysite.settings  # noqa
+DJANGO_SETTINGS_MODULE = os.path.join(BASE_DIR, 'config.settings')
 
 # Configure Django App for Heroku.
 # import django_heroku

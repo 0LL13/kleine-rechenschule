@@ -11,8 +11,10 @@
         {% for task in task_list %}
             <tr>
                 <td><label for="id_answer">{{ task.0 }} - {{ task.1 }} = </label></td>
-                <td><input id="id_answer" type="text" size=2 name="answer_{{ forloop.counter }}"
-                   onkeypress="return event.charCode >= 48 && event.charCode <=57">{{ form }}
+                <td><input id="id_answer" type="text" size=2
+                           name="answer_{{ forloop.counter }}"
+                           autocomplete="off"
+                           onkeypress="return event.charCode >= 48 && event.charCode <=57">{{ form }}
                 </input></td>
             </tr>
         {% endfor %}

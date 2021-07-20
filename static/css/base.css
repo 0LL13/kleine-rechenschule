@@ -61,3 +61,7 @@ th, td {
   background-color: #4CAF50;
   color: white;
 }
+
+.noHover{
+    cursor: pointer;
+}
