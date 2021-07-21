@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+# import django_on_heroku
 import os
 from pathlib import Path
 from environs import Env
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
 
     # local
     'krs',
+    'config',
 ]
 
 MIDDLEWARE = [
@@ -155,5 +157,4 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
 DJANGO_SETTINGS_MODULE = os.path.join(BASE_DIR, 'config.settings')
 
 # Configure Django App for Heroku.
-# import django_heroku
-# django_heroku.settings(locals())
+# django_on_heroku.settings(locals())
