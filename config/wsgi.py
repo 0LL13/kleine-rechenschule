@@ -11,12 +11,12 @@ import os
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')  # noqa
 
-# this throws error ModuleNotFound:
-# from django.core.wsgi import get_wsgi_application  # noqa
-# application = get_wsgi_application()
+from django.core.wsgi import get_wsgi_application  # noqa
+application = get_wsgi_application()
 
-import django.core.handlers.wsgi  # noqa
-application = django.core.handlers.wsgi.WSGIHandler()
+# this I found on SO
+# import django.core.handlers.wsgi  # noqa
+# application = django.core.handlers.wsgi.WSGIHandler()
 
 
 from whitenoise import WhiteNoise  # noqa
